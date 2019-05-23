@@ -48,11 +48,11 @@ typedef struct
 bool InitialList(sequence *_list);
 unsigned int GetElemCnt(const sequence _list);
 unsigned int GetLength(const sequence _list);
-bool ListIsEmpty(const sequence _list);
-bool ListIsFull(const sequence _list);
+bool IsEmpty(const sequence _list);
+bool IsFull(const sequence _list);
 int InsertElem(sequence *_list, unsigned int pos, Item i);
 bool GetElem(const sequence _list, unsigned int pos, Item *i);
-bool LocateElem(const sequence _list, Item i);
+bool LocateElem(const sequence _list, Item i, unsigned int *pos);
 int DeleteElem(sequence *_list, unsigned int pos, Item *i);
 bool CleanList(sequence *_list);
 

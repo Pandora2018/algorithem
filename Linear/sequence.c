@@ -18,7 +18,10 @@ bool InitialList(sequence *_list)
 		_list->length = size;
 		_list->cnt = 0;
 	} else
+	{
+		printf("Initialize linear list fail.\n");
 		return false;
+	}
 
 	return true;
 }
@@ -33,12 +36,12 @@ unsigned int GetLength(const sequence _list)
 	return _list.length;
 }
 
-bool ListIsEmpty(const sequence _list)
+bool IsEmpty(const sequence _list)
 {
 	return _list.cnt == 0;
 }
 
-bool ListIsFull(const sequence _list)
+bool IsFull(const sequence _list)
 {
 	return _list.cnt == _list.length;
 }
@@ -46,23 +49,25 @@ bool ListIsFull(const sequence _list)
 int InsertElem(sequence *_list, unsigned int pos, Item i)
 {
 	assert(_list != NULL);
-	assert(pos > 0 && pos < GetLength(*_list));
+	assert(pos > 0);
+	assert(pos < GetLength(*_list));
 
-	if (ListIsFull(*_list))
+	if (! IsFull(*_list))
+	{
+		for (unsigned int index = GetElemCnt(*_list) - 1;
+				index >= pos; --index)
+		{
+			(*_list).list[index + 1] = (*_list).list[index];
+		}
+	}
+	else
 	{
 		printf("Linear list is fulled.\n");
 		return FULL;
 	}
 
-	for (unsigned int index = GetLength(*_list) - 1;
-			index >= pos; --index)
-	{
-		(*_list).list[index + 1] = (*_list).list[index];
-	}
-
 	(*_list).list[pos] = i;
-
-	_list->cnt++;
+	_list->cnt ++;
 	
 	return true;
 }
@@ -70,21 +75,23 @@ int InsertElem(sequence *_list, unsigned int pos, Item i)
 bool GetElem(const sequence _list, unsigned int pos, Item *i)
 {
 	assert(i != NULL);
-	assert(pos > 0 && pos < GetLength(_list));
+	assert(pos > 0);
+	assert(pos < GetLength(_list));
 
 	*i = _list.list[pos - 1];
 
 	return true;
 }
 
-bool LocateElem(const sequence _list, Item i)
+bool LocateElem(const sequence _list, Item i, unsigned int *pos)
 {
 	bool is_find = false;
 
-	for (int index = 0; i < GetLength(_list); ++index)
+	for (int index = 0; index < GetLength(_list); ++index)
 	{
 		if (_list.list[index] == i)
 		{
+			*pos = index;
 			is_find = true;
 			break;
 		}
@@ -96,9 +103,10 @@ bool LocateElem(const sequence _list, Item i)
 int DeleteElem(sequence *_list, unsigned int pos, Item *i)
 {
 	assert(_list != NULL);
-	assert(pos > 0 && pos < GetLength(*_list));
+	assert(pos > 0);
+	assert(pos < GetLength(*_list));
 
-	if (ListIsEmpty(*_list))
+	if (IsEmpty(*_list))
 	{
 		printf("Linear list is emptied.\n");
 		return EMPTY;
@@ -107,12 +115,12 @@ int DeleteElem(sequence *_list, unsigned int pos, Item *i)
 	*i = _list->list[pos];
 
 	for (unsigned int index = pos;
-			pos < GetLength(*_list) - 1; ++index)
+			index < GetLength(*_list) - 1; ++index)
 	{
 		(*_list).list[index] = (*_list).list[index + 1];
 	}
-	
-	_list->cnt--;
+
+	_list->cnt --;
 
 	return true;
 }
