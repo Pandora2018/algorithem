@@ -21,7 +21,7 @@
 
 // "size" is linear list maximun
 #ifndef size
-#	define size 30
+#	define SIZE 30
 #endif
 
 // if linear list is empty, then error code is -1.
@@ -39,7 +39,7 @@ typedef double Item;
 /* use array define linear list */
 typedef struct
 {
-	Item list[size];
+	Item list[SIZE];
 	unsigned int length;
 	unsigned int cnt;
 }sequence;
@@ -54,6 +54,8 @@ unsigned int GetLength(const sequence _list);
 bool IsEmpty(const sequence _list);
 
 bool IsFull(const sequence _list);
+
+void TraversalList(const sequence _list);
 
 int InsertElem(sequence *_pl, unsigned int pos, Item i);
 

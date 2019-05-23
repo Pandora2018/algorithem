@@ -10,78 +10,51 @@
 # ====================================================*/
 
 #include "sequence.h"
+#include <time.h>
+#include <stdlib.h>
+
+static void Travera(double *d, unsigned int cnt);
 
 int main(void)
 {
-	double v;
+	double v[SIZE], tmp;
 	sequence test;
 
-	printf("Enter value : ");
-	scanf("%lf", &v);
-	
 	InitialList(&test);
 
-	for (int i = 0; i < size; ++i)
+	srand((unsigned int)time(NULL));
+
+	for (int i = 0; i < SIZE; ++i)
 	{
-		test.list[i] = i * 2.00;
+		test.list[i] = rand() % 30 + 1;
 		test.cnt++;
 	}
 
-	// test GetLength
-	printf("length : %u\n", GetLength(test));
+	TraversalList(test);
 
-	// test GetElem
-	GetElem(test, 15, &v);
-	printf("GetElem(10) : %.2f\n", v);
+	int j = 0;
+	unsigned int cnt = GetElemCnt(test);
 
-	// test LocateElem
-	unsigned int pos;
-	if (LocateElem(test, 34.00, &pos))
-		printf("pos : %u\n", pos);
-	else
-		printf("not find.\n");
-
-	// Traveal linear list
-	for (int i = 0; i < size; ++i)
-		printf("%.2f ", test.list[i]);
-
-	// test DeleteElem
-	DeleteElem(&test, 20, &v);
-	putchar('\n');
-	printf("DeleteElem : %.2f\n", v);
-
-	DeleteElem(&test, 23, &v);
-	printf("DeleteElem : %.2f\n", v);
-
-	putchar('\n');
-
-	for (int i = 0; i < size; ++i)
-		printf("%.2f ", test.list[i]);
-
-	putchar('\n');
-
-	// test GetLength
-	printf("Elem count : %u\n", GetElemCnt(test));
-
-	if (! IsFull(test))
+	for (int i = 0; i < cnt; ++i)
 	{
-		InsertElem(&test, 20, v);
-		/* InsertElem(&test, 21, v); */
-		/*
-		 * GetElem(test, 10, &v);
-		 * printf("v : %.2f\n", v);
-		 */
-		/* printf("test.list[20] : %.2f\n", test.list[20]); */
+		if (GetElem(test, i, &tmp) && tmp >= 25.00)
+			v[j++] = tmp;
 	}
 
-	for (int i = 0; i < size; ++i)
-		printf("%.2f ", test.list[i]);
-
+	putchar('\n');
 	putchar('\n');
 
-	printf("Elem count : %u\n", GetElemCnt(test));
+	Travera(v, j);
 
-	CleanList(&test);
+	putchar('\n');
 	
 	return 0;
+}
+
+static void Travera(double *d, unsigned int cnt)
+{
+	for (int i = 0; i < cnt; ++i)
+		printf("%.2f ", *(d + i));
+
+	return;
 }

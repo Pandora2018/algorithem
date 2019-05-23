@@ -22,7 +22,7 @@ bool InitialList(sequence *_pl)
 {
 	if (_pl != NULL)
 	{
-		_pl->length = size;
+		_pl->length = SIZE;
 		_pl->cnt = 0;
 	} else
 	{
@@ -82,6 +82,19 @@ bool IsFull(const sequence _list)
 }
 
 /**
+ * @Brief	TraversalList 
+ *
+ * @Param	_list
+ */
+void TraversalList(const sequence  _list)
+{
+	for (int index = 0; index < GetElemCnt(_list); ++index)
+		printf("%.2f ", _list.list[index]);
+
+	return;
+}
+
+/**
  * @Brief	InsertElem 
  *
  * @Param	_pl is linear list
@@ -128,10 +141,10 @@ int InsertElem(sequence *_pl, unsigned int pos, Item i)
 bool GetElem(const sequence _list, unsigned int pos, Item *i)
 {
 	assert(i != NULL);
-	assert(pos > 0);
+	assert(pos >= 0);
 	assert(pos < GetLength(_list));
 
-	*i = _list.list[pos - 1];
+	*i = _list.list[pos];
 
 	return true;
 }
