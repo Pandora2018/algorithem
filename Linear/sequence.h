@@ -36,7 +36,7 @@
 
 typedef double Item;
 
-/* we use struct define linear list */
+/* use array define linear list */
 typedef struct
 {
 	Item list[size];
@@ -45,15 +45,24 @@ typedef struct
 }sequence;
 
 /* linear list base operator */
-bool InitialList(sequence *_list);
+bool InitialList(sequence *_pl);
+
 unsigned int GetElemCnt(const sequence _list);
+
 unsigned int GetLength(const sequence _list);
+
 bool IsEmpty(const sequence _list);
+
 bool IsFull(const sequence _list);
-int InsertElem(sequence *_list, unsigned int pos, Item i);
+
+int InsertElem(sequence *_pl, unsigned int pos, Item i);
+
 bool GetElem(const sequence _list, unsigned int pos, Item *i);
+
 bool LocateElem(const sequence _list, Item i, unsigned int *pos);
-int DeleteElem(sequence *_list, unsigned int pos, Item *i);
-bool CleanList(sequence *_list);
+
+int DeleteElem(sequence *_pl, unsigned int pos, Item *i);
+
+bool CleanList(sequence *_pl);
 
 #endif

@@ -9,7 +9,6 @@
 #
 # ====================================================*/
 
-#include <stdio.h>
 #include "sequence.h"
 
 int main(void)
