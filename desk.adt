@@ -1,0 +1,42 @@
+# ====================================================
+#   Copyright (C)2020 All rights reserved.
+#
+#   Author        : Pandora
+#   Email         : pandora@github.com
+#   File Name     : desk.adt
+#   Last Modified : 2020-01-04 18:09
+#   Describe      :
+#
+# ====================================================
+
+ADT Desk {
+	D = {(length,width,heigh)};
+	S = {(length,width,heigh) | length > 0, width > 0, heigh >0};
+	// operation
+	CreateDesk(length, width, heigh)
+	result: create a desk;
+
+	GetDeskLength(&desk, &length);
+	initialization: desk must exists
+	result: get desk length
+
+	GetDeskWidth(&desk, &width);
+	initialization: desk must exists
+	result: get desk width
+
+	GetDeskHeigh(&desk, &heigh);
+	initialization: desk must exists
+	result: get desk heigh
+	
+	DeskColor(&desk);
+	initialization: desk must exists
+	result: get desk color
+
+	DeskStyle(&desk);
+	initialization: desk must exists
+	result: get desk style
+
+	DestoryDesk(&desk);
+	initialization: desk must exists
+	result: destory desk,then desk is not exists.
+} ADT Desk
