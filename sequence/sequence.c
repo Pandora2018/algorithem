@@ -73,7 +73,7 @@ bool destoryList(seqList list)
 		printf("sequence list not exist.\n");
 	} else
 	{
-		printf("sequence list is empty.\n");
+		printf("sequence list not exist.\n");
 		return false;	
 	}
 
