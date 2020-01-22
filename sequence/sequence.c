@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.c
-#   Last Modified : 2020-01-08 16:34
+#   Last Modified : 2020-01-22 13:29
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
@@ -14,24 +14,24 @@
 #include <stdbool.h>
 #include "sequence.h"
 
-bool initList(seqList list)
+bool initList(seqList *L)
 {
-	unsigned int MAXSIZE;
+	unsigned int maxSize;
 	printf("sequence list maxsize : ");
-	scanf("%u", &MAXSIZE);
+	scanf("%u", &maxSize);
 
-	list.elem = (ElemType *)malloc(sizeof(ElemType) * MAXSIZE);
-	if (!list.elem) return false;
+	L->elem = (ElemType *)malloc(sizeof(ElemType) * maxSize);
+	if (! L->elem) return false;
 
-	list.length = 0;
+	L->length = 0;
 
 	return true;
 }
 
 
-unsigned int listLength(seqList list)
+unsigned int listLength(seqList *L)
 {
-	return (list.length);
+	return (L->length);
 }
 
 
@@ -62,6 +62,21 @@ bool clearList(seqList list)
 	return true;
 }
 
+
+bool insertElemOfList(seqList *L, int pos, ElemType e)
+{
+	unsigned int length = listLength(L);
+
+	if (pos < 1 || pos > length + 1) return false;
+	
+	for (int index=length;index>=pos;index--)
+		L->elem[index] = L->elem[index-1];
+
+	L->elem[pos-1] = e;
+	L->length++;
+
+	return true;
+}
 
 
 
