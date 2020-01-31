@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.h
-#   Last Modified : 2020-01-22 13:29
+#   Last Modified : 2020-01-31 17:18
 #   Describe      :
 #
 # ====================================================*/
@@ -19,8 +19,8 @@
 // #define SUCCESS 1
 // #define FAIL 0
 
-// typedef int ElemType;
-typedef char ElemType;
+typedef int ElemType;
+// typedef char ElemType;
 
 typedef struct {
 	ElemType *elem;		// sequence list base adddress
@@ -32,6 +32,7 @@ unsigned int listLength(seqList *L);
 bool getElem(seqList list, int i, ElemType *e);
 bool clearList(seqList list);
 bool insertElemOfList(seqList *L, int pos, ElemType e);
+bool delElemOfList(seqList *L, int pos, ElemType *e);
 
 
 

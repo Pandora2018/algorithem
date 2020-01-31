@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.c
-#   Last Modified : 2020-01-22 13:29
+#   Last Modified : 2020-01-31 19:02
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
@@ -73,7 +73,30 @@ bool insertElemOfList(seqList *L, int pos, ElemType e)
 		L->elem[index] = L->elem[index-1];
 
 	L->elem[pos-1] = e;
-	L->length++;
+	(L->length)++;
+
+	return true;
+}
+
+
+bool delElemOfList(seqList *L, int pos, ElemType *e)
+{
+	unsigned int len = listLength(L);
+
+	if (pos < 1 || pos > len)
+	{
+		printf("Position Over Flow!\n");
+		exit(-2);
+	}
+
+	ElemType *start = L->elem + pos - 1;
+	*e = *start;
+	ElemType *end = L->elem + len - 1;
+
+	for (++start;start<=end;++start)
+		*(start - 1) = *start;
+	
+	--(L->length);
 
 	return true;
 }
