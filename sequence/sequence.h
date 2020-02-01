@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.h
-#   Last Modified : 2020-01-31 17:18
+#   Last Modified : 2020-02-01 18:44
 #   Describe      :
 #
 # ====================================================*/
@@ -33,9 +33,10 @@ bool getElem(seqList list, int i, ElemType *e);
 bool clearList(seqList list);
 bool insertElemOfList(seqList *L, int pos, ElemType e);
 bool delElemOfList(seqList *L, int pos, ElemType *e);
+int getPositionOfList(seqList *L, ElemType e);
 
 
 
-bool destoryList(seqList list);
+bool destoryList(seqList *L);
 
 #endif

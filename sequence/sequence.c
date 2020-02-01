@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.c
-#   Last Modified : 2020-01-31 19:02
+#   Last Modified : 2020-02-01 18:44
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
@@ -102,16 +102,35 @@ bool delElemOfList(seqList *L, int pos, ElemType *e)
 }
 
 
-
-bool destoryList(seqList list)
+int getPositionOfList(seqList *L, ElemType e)
 {
-	if (list.elem)
+	// Get element postion,if not element,then return -1.
+	unsigned int len = listLength(L);
+	int pos = -1;
+	
+	for (int in=0;in<len;++in)
 	{
-		free(list.elem);
-		printf("sequence list not exist.\n");
+		if (L->elem[in] == e)
+		{
+			pos = in + 1;
+			break;
+		}
+	}
+
+	return pos;
+}
+
+
+
+bool destoryList(seqList *L)
+{
+	if (L->elem)
+	{
+		free(L->elem);
+		printf("Sequence List Destory.\n");
 	} else
 	{
-		printf("sequence list not exist.\n");
+		printf("Sequence List Not Exist.\n");
 		return false;	
 	}
 
