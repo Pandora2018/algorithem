@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.c
-#   Last Modified : 2020-02-01 18:44
+#   Last Modified : 2020-02-03 20:40
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
@@ -67,7 +67,7 @@ bool insertElemOfList(seqList *L, int pos, ElemType e)
 {
 	unsigned int length = listLength(L);
 
-	if (pos < 1 || pos > length + 1) return false;
+	if (pos < 1 || pos > length + 1) exit(-1);
 	
 	for (int index=length;index>=pos;index--)
 		L->elem[index] = L->elem[index-1];
@@ -118,6 +118,21 @@ int getPositionOfList(seqList *L, ElemType e)
 	}
 
 	return pos;
+}
+
+
+int locateOfList(seqList *L, ElemType e2,
+		bool (*cmp)(ElemType e1, ElemType e2))
+{
+	ElemType *current = L->elem;
+	int in = 0;
+	unsigned int length = listLength(L);
+
+	while (in < length && !(*cmp)(*current++, e2))
+		in++;
+
+	if (in < length) return (in + 1);
+	else return NOTF;
 }
 
 

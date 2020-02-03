@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.h
-#   Last Modified : 2020-02-01 18:44
+#   Last Modified : 2020-02-03 20:40
 #   Describe      :
 #
 # ====================================================*/
@@ -18,6 +18,7 @@
 // #define ERROR 0
 // #define SUCCESS 1
 // #define FAIL 0
+#define NOTF -1
 
 typedef int ElemType;
 // typedef char ElemType;
@@ -34,7 +35,8 @@ bool clearList(seqList list);
 bool insertElemOfList(seqList *L, int pos, ElemType e);
 bool delElemOfList(seqList *L, int pos, ElemType *e);
 int getPositionOfList(seqList *L, ElemType e);
-
+int locateOfList(seqList *L, ElemType e2,
+		bool (*cmp)(ElemType E, ElemType e));
 
 
 bool destoryList(seqList *L);
