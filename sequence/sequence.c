@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.c
-#   Last Modified : 2020-02-03 20:40
+#   Last Modified : 2020-02-04 19:01
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
@@ -16,58 +16,58 @@
 
 bool initList(seqList *L)
 {
-	unsigned int maxSize;
-	printf("sequence list maxsize : ");
-	scanf("%u", &maxSize);
-
-	L->elem = (ElemType *)malloc(sizeof(ElemType) * maxSize);
+	L->elem = (ElemType *)malloc(sizeof(ElemType) * MAXSIZE);
 	if (! L->elem) return false;
 
 	L->length = 0;
+	L->listSize = MAXSIZE;
 
 	return true;
 }
 
 
-unsigned int listLength(seqList *L)
+unsigned int lengthOfList(seqList *L)
 {
 	return (L->length);
 }
 
 
-bool getElem(seqList list, int i, ElemType *e)
+bool getElem(seqList *L, int i, ElemType *e)
 {
-	if (i >= 1 && i <= list.length)
+	if (i >= 1 && i <= L->length)
 	{
-		*e = list.elem[i - 1];
+		*e = L->elem[i - 1];
 		return true;
 	} else
 	{
-		printf("index not valid\v");
+		printf("Index Not Valid\v");
 		return false;
 	}
 }
 
 
-bool clearList(seqList list)
+void clearList(seqList *L)
 {
-	if (list.length != 0)
-		list.length = 0;
-	else
-	{
-		printf("sequence list not element.\n");
-		return false;
-	}
-
-	return true;
+	L->length = 0;
+	return;
 }
 
 
 bool insertElemOfList(seqList *L, int pos, ElemType e)
 {
-	unsigned int length = listLength(L);
+	unsigned int length = lengthOfList(L);
 
-	if (pos < 1 || pos > length + 1) exit(-1);
+	if (pos < 1 || pos > length + 1) exit(INDEX_ERR);
+
+	if (L->length >= L->listSize)
+	{
+		ElemType *newbase = (ElemType *)realloc(L->elem,
+				sizeof(ElemType) * (L->length + LIST_INCREMENT));
+
+		if (! newbase) exit(ALLOCFAIL);
+		L->elem = newbase;
+		L->listSize += LIST_INCREMENT;
+	}
 	
 	for (int index=length;index>=pos;index--)
 		L->elem[index] = L->elem[index-1];
@@ -81,7 +81,7 @@ bool insertElemOfList(seqList *L, int pos, ElemType e)
 
 bool delElemOfList(seqList *L, int pos, ElemType *e)
 {
-	unsigned int len = listLength(L);
+	unsigned int len = lengthOfList(L);
 
 	if (pos < 1 || pos > len)
 	{
@@ -105,7 +105,7 @@ bool delElemOfList(seqList *L, int pos, ElemType *e)
 int getPositionOfList(seqList *L, ElemType e)
 {
 	// Get element postion,if not element,then return -1.
-	unsigned int len = listLength(L);
+	unsigned int len = lengthOfList(L);
 	int pos = -1;
 	
 	for (int in=0;in<len;++in)
@@ -126,7 +126,7 @@ int locateOfList(seqList *L, ElemType e2,
 {
 	ElemType *current = L->elem;
 	int in = 0;
-	unsigned int length = listLength(L);
+	unsigned int length = lengthOfList(L);
 
 	while (in < length && !(*cmp)(*current++, e2))
 		in++;
@@ -143,11 +143,10 @@ bool destoryList(seqList *L)
 	{
 		free(L->elem);
 		printf("Sequence List Destory.\n");
+		return true;
 	} else
 	{
 		printf("Sequence List Not Exist.\n");
 		return false;	
 	}
-
-	return true;
 }

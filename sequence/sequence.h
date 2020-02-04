@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : sequence.h
-#   Last Modified : 2020-02-03 20:40
+#   Last Modified : 2020-02-04 19:01
 #   Describe      :
 #
 # ====================================================*/
@@ -14,24 +14,29 @@
 
 #include <stdbool.h>
 
-// #define OK 1
-// #define ERROR 0
-// #define SUCCESS 1
-// #define FAIL 0
 #define NOTF -1
+#define ALLOCFAIL -2
+#define INDEX_ERR -3
 
 typedef int ElemType;
 // typedef char ElemType;
 
+#ifndef MAXSIZE
+	#define MAXSIZE 20
+#endif
+
+#define LIST_INCREMENT 10
+
 typedef struct {
 	ElemType *elem;		// sequence list base adddress
 	int length;			// number of element
+	unsigned int listSize;	// current allocation memory
 } seqList;
 
 bool initList(seqList *L);
-unsigned int listLength(seqList *L);
-bool getElem(seqList list, int i, ElemType *e);
-bool clearList(seqList list);
+unsigned int lengthOfList(seqList *L);
+bool getElem(seqList *L, int i, ElemType *e);
+void clearList(seqList *L);
 bool insertElemOfList(seqList *L, int pos, ElemType e);
 bool delElemOfList(seqList *L, int pos, ElemType *e);
 int getPositionOfList(seqList *L, ElemType e);
