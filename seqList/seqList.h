@@ -3,8 +3,8 @@
 #
 #   Author        : Pandora
 #   Email         : pandora@github.com
-#   File Name     : sequence.h
-#   Last Modified : 2020-02-04 19:01
+#   File Name     : seqList.h
+#   Last Modified : 2020-02-06 09:34
 #   Describe      :
 #
 # ====================================================*/
@@ -15,6 +15,7 @@
 #include <stdbool.h>
 
 #define NOTF -1
+#define NOTELEM -1
 #define ALLOCFAIL -2
 #define INDEX_ERR -3
 
@@ -43,6 +44,8 @@ int getPositionOfList(seqList *L, ElemType e);
 int locateOfList(seqList *L, ElemType e2,
 		bool (*cmp)(ElemType E, ElemType e));
 
+int intersectionOfList(seqList *La,
+		seqList *Lb, seqList *res);
 
 bool destoryList(seqList *L);
 

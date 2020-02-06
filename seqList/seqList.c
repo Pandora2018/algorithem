@@ -3,8 +3,8 @@
 #
 #   Author        : Pandora
 #   Email         : pandora@github.com
-#   File Name     : sequence.c
-#   Last Modified : 2020-02-04 19:01
+#   File Name     : seqList.c
+#   Last Modified : 2020-02-06 09:32
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "sequence.h"
+#include "seqList.h"
 
 bool initList(seqList *L)
 {
@@ -135,6 +135,30 @@ int locateOfList(seqList *L, ElemType e2,
 	else return NOTF;
 }
 
+int intersectionOfList(seqList *La, seqList *Lb, seqList *res)
+{
+	int pos = 0;
+	unsigned int cntA, cntB;
+	cntA = lengthOfList(La);
+	cntB = lengthOfList(Lb);
+
+	for (int indexOfA = 0; indexOfA < cntA; ++indexOfA)
+	{
+		for (int indexOfB = 0; indexOfB < cntB; ++indexOfB)
+		{
+			if (La->elem[indexOfA] == Lb->elem[indexOfB])
+			{
+				res->elem[pos] = La->elem[indexOfA];
+				++(res->length);
+				break;
+			}
+
+			++pos;
+		}
+	}
+
+	return (res->length ? res->length : NOTELEM);
+}
 
 
 bool destoryList(seqList *L)
