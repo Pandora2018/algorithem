@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : seqList.c
-#   Last Modified : 2020-02-06 09:32
+#   Last Modified : 2020-02-06 11:11
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
