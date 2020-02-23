@@ -35,17 +35,24 @@ typedef struct {
 } seqList;
 
 bool initList(seqList *L);
-unsigned int lengthOfList(seqList *L);
+
+unsigned int lengthOfList(seqList* const L);
+
 bool getElem(seqList *L, int i, ElemType *e);
+
 void clearList(seqList *L);
+
 bool insertElemOfList(seqList *L, int pos, ElemType e);
+
 bool delElemOfList(seqList *L, int pos, ElemType *e);
+
 int getPositionOfList(seqList *L, ElemType e);
+
 int locateOfList(seqList *L, ElemType e2,
 		bool (*cmp)(ElemType E, ElemType e));
 
-int intersectionOfList(seqList *La,
-		seqList *Lb, seqList *res);
+int intersectionOfList(seqList* const La,
+		seqList* const Lb, seqList *res);
 
 bool destoryList(seqList *L);
 

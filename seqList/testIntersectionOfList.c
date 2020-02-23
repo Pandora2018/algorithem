@@ -16,12 +16,11 @@
 #include "seqList.h"
 
 
-void visit(seqList *L)
+void visit(seqList* const L)
 {
 	unsigned int length = lengthOfList(L);
 
 	for (int in = 0; in < length; in++)
-		// printf("%d ", L->elem[in]);
 		fprintf(stdout, "%d ", L->elem[in]);
 
 	putchar('\n');
@@ -44,19 +43,21 @@ int main(void)
 	for (int in = 1; in <= 10; in++)
 		insertElemOfList(La, in, rand() % 10 + 1);
 
-	for (int in = 1; in <= 8; in++)
+	for (int in = 1; in <= 18; in++)
 		insertElemOfList(Lb, in, rand() % 10 + 1);
 
+	printf("1st seqList: ");
 	visit(La);
+	printf("2st seqList: ");
 	visit(Lb);
 
-	if (intersectionOfList(La, Lb, r) != NOTELEM) visit(r);
-	
-	/*
-	 * intersectionOfList(La, Lb, r);
-	 * visit(r);
-	 */
+	printf("intersectionOfList: ");
+	if (intersectionOfList(La, Lb, r) != NOTELEM)
+		visit(r);
 
+	fprintf(stdout, "intersectionOfList count: %u\n",
+			r->length);
+	
 	destoryList(La);
 	destoryList(Lb);
 	destoryList(r);

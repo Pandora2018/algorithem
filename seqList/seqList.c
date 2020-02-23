@@ -26,7 +26,7 @@ bool initList(seqList *L)
 }
 
 
-unsigned int lengthOfList(seqList *L)
+unsigned int lengthOfList(seqList* const L)
 {
 	return (L->length);
 }
@@ -135,7 +135,7 @@ int locateOfList(seqList *L, ElemType e2,
 	else return NOTF;
 }
 
-int intersectionOfList(seqList *La, seqList *Lb, seqList *res)
+int intersectionOfList(seqList* const La, seqList* const Lb, seqList *res)
 {
 	int pos = 0;
 	unsigned int cntA, cntB;
@@ -148,12 +148,10 @@ int intersectionOfList(seqList *La, seqList *Lb, seqList *res)
 		{
 			if (La->elem[indexOfA] == Lb->elem[indexOfB])
 			{
-				res->elem[pos] = La->elem[indexOfA];
+				res->elem[pos++] = La->elem[indexOfA];
 				++(res->length);
 				break;
 			}
-
-			++pos;
 		}
 	}
 
