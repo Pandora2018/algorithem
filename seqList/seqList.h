@@ -9,8 +9,8 @@
 #
 # ====================================================*/
 
-#ifndef _sequence_h
-#define _sequence_h
+#ifndef __SEQUENCE_H
+#define __SEQUENCE_H
 
 #include <stdbool.h>
 
@@ -27,6 +27,10 @@ typedef int ElemType;
 #endif
 
 #define LIST_INCREMENT 10
+
+#ifdef __cplusplus
+	extern "C" {
+#endif
 
 typedef struct {
 	ElemType *elem;		// sequence list base adddress
@@ -55,5 +59,9 @@ int intersectionOfList(seqList* const La,
 		seqList* const Lb, seqList *res);
 
 bool destoryList(seqList *L);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
