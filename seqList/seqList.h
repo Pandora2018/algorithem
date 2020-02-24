@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : seqList.h
-#   Last Modified : 2020-02-06 11:11
+#   Last Modified : 2020-02-24 19:49
 #   Describe      :
 #
 # ====================================================*/
@@ -57,6 +57,8 @@ int locateOfList(seqList *L, ElemType e2,
 
 int intersectionOfList(seqList* const La,
 		seqList* const Lb, seqList *res);
+
+void del_repeat_elem(seqList *L);
 
 bool destoryList(seqList *L);
 

@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : seqList.c
-#   Last Modified : 2020-02-06 11:11
+#   Last Modified : 2020-02-24 19:49
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
@@ -155,6 +155,28 @@ int intersectionOfList(seqList* const La, seqList* const Lb, seqList *res)
 	}
 
 	return (res->length ? res->length : NOTELEM);
+}
+
+
+void del_repeat_elem(seqList *L)
+{
+	unsigned int len = lengthOfList(L);
+	ElemType e;
+
+	for (int st = 0; st < len; ++st)
+	{
+		for (int next = st + 1; next < len; ++next)
+		{
+			if (L->elem[st] == L->elem[next])
+			{
+				delElemOfList(L, next + 1, &e);
+				len = lengthOfList(L);
+				--next;
+			}
+		}
+	}
+	
+	return;
 }
 
 

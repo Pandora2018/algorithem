@@ -42,15 +42,17 @@ int main(void)
 	srand((unsigned int)time(NULL));
 
 	for (int in = 1; in <= 10; in++)
-		insertElemOfList(La, in, rand() % 10 + 1);
+		insertElemOfList(La, in, rand() % 20 + 1);
 
 	for (int in = 1; in <= 18; in++)
-		insertElemOfList(Lb, in, rand() % 10 + 1);
+		insertElemOfList(Lb, in, rand() % 20 + 1);
 
 	cout << "1st seqList: ";
+	del_repeat_elem(La);
 	visit(La);
 
 	cout << "2st seqList: ";
+	del_repeat_elem(Lb);
 	visit(Lb);
 
 	cout <<"intersectionOfList: ";
