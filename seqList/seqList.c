@@ -137,7 +137,7 @@ int locateOfList(seqList *L, ElemType e2,
 
 int intersectionOfList(seqList* const La, seqList* const Lb, seqList *res)
 {
-	int pos = 0;
+	int pos = 1;
 	unsigned int cntA, cntB;
 	cntA = lengthOfList(La);
 	cntB = lengthOfList(Lb);
@@ -148,8 +148,7 @@ int intersectionOfList(seqList* const La, seqList* const Lb, seqList *res)
 		{
 			if (La->elem[indexOfA] == Lb->elem[indexOfB])
 			{
-				res->elem[pos++] = La->elem[indexOfA];
-				++(res->length);
+				insertElemOfList(res, pos++, La->elem[indexOfA]);
 				break;
 			}
 		}
