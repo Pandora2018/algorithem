@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : seqList.c
-#   Last Modified : 2020-02-24 19:49
+#   Last Modified : 2020-02-25 10:51
 #   Describe      : sequence list algorithem
 #
 # ====================================================*/
@@ -26,7 +26,7 @@ bool initList(seqList *L)
 }
 
 
-unsigned int lengthOfList(seqList* const L)
+inline unsigned int lengthOfList(seqList* const L)
 {
 	return (L->length);
 }
@@ -46,7 +46,7 @@ bool getElem(seqList *L, int i, ElemType *e)
 }
 
 
-void clearList(seqList *L)
+inline void clearList(seqList *L)
 {
 	L->length = 0;
 	return;
@@ -176,6 +176,28 @@ void del_repeat_elem(seqList *L)
 		}
 	}
 	
+	return;
+}
+
+
+void asc_seq_list(seqList* const L)
+{
+	unsigned int len = lengthOfList(L);
+	ElemType tmp;
+
+	for (int st = 0; st < len; ++st)
+	{
+		for (int next = st + 1; next < len; ++next)
+		{
+			if (L->elem[st] > L->elem[next])
+			{
+				tmp = L->elem[st];
+				L->elem[st] = L->elem[next];
+				L->elem[next] = tmp;
+			}
+		}
+	}
+
 	return;
 }
 

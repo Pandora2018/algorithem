@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : test_cross_of_list.cpp
-#   Last Modified : 2020-02-24 18:09
+#   Last Modified : 2020-02-25 10:51
 #   Describe      :
 #
 # ====================================================*/
@@ -49,15 +49,20 @@ int main(void)
 
 	cout << "1st seqList: ";
 	del_repeat_elem(La);
+	asc_seq_list(La);
 	visit(La);
 
 	cout << "2st seqList: ";
 	del_repeat_elem(Lb);
+	asc_seq_list(Lb);
 	visit(Lb);
 
 	cout <<"intersectionOfList: ";
 	if (intersectionOfList(La, Lb, r) != NOTELEM)
+	{
+		asc_seq_list(r);
 		visit(r);
+	}
 
 	cout << "insertElemOfList count: " << r->length <<endl;
 	
