@@ -41,30 +41,33 @@ int main(void)
 
 	srand((unsigned int)time(NULL));
 
-	for (int in = 1; in <= 10; in++)
-		insertElemOfList(La, in, rand() % 20 + 1);
+	for (int in = 1; in <= 100000; in++)
+		insertElemOfList(La, in, rand() % 1000000 + 1);
 
-	for (int in = 1; in <= 18; in++)
-		insertElemOfList(Lb, in, rand() % 20 + 1);
+	for (int in = 1; in <= 150000; in++)
+		insertElemOfList(Lb, in, rand() % 1500000 + 1);
 
-	cout << "1st seqList: ";
-	del_repeat_elem(La);
-	asc_seq_list(La);
-	visit(La);
-
-	cout << "2st seqList: ";
-	del_repeat_elem(Lb);
-	asc_seq_list(Lb);
-	visit(Lb);
+/*
+ *     cout << "1st seqList: ";
+ *     del_repeat_elem(La);
+ *     asc_seq_list(La);
+ *     visit(La);
+ * 
+ *     cout << "2st seqList: ";
+ *     del_repeat_elem(Lb);
+ *     asc_seq_list(Lb);
+ *     visit(Lb);
+ */
 
 	cout <<"intersectionOfList: ";
 	if (intersectionOfList(La, Lb, r) != NOTELEM)
 	{
+		del_repeat_elem(r);
 		asc_seq_list(r);
 		visit(r);
 	}
 
-	cout << "insertElemOfList count: " << r->length <<endl;
+	cout << "insertElemOfList count: " << r->length << endl;
 	
 	destoryList(La);
 	destoryList(Lb);
