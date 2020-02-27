@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.h
-#   Last Modified : 2020-02-26 20:27
+#   Last Modified : 2020-02-27 12:23
 #   Describe      :
 #
 # ====================================================*/
@@ -23,7 +23,7 @@
 
 
 /* define "ElemType" */
-typedef struct eample
+typedef struct books
 {
 	char id[10];
 	char name[20];
@@ -45,18 +45,20 @@ typedef node* plist;
 
 
 /* operator linked list */
-bool initi_linked_list(plist pl);
+bool linked_list_initi(plist pl);
 
 bool linked_list_empty(plist pl);
 
-bool destory_linked_list(plist pl);
-
 unsigned int linked_list_length(plist pl);
 
+bool linked_list_clear(plist pl);
+
+bool linked_list_take_elem(plist pl, int pos, ElemType* e);
 
 
 
 
+bool linked_list_destory(plist pl);
 
 #ifdef __cplusplus
 }
