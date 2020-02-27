@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : test_init_list.c
-#   Last Modified : 2020-02-27 12:23
+#   Last Modified : 2020-02-27 20:05
 #   Describe      :
 #
 # ====================================================*/
@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include <string.h>
 #include "linked_list.h"
 
@@ -20,36 +21,34 @@ int main(void)
 {
 	plist pl;	// linked_list head point
 	
-	if (! linked_list_initi(pl))
-		printf("linked_list initialization fail\n");
-
-	/* linked_list_empty(pl); */
-	/* printf("plist empty: %p\n", pl->next); */
-
+	linked_list_initi(pl);
+	
 	/* the first node */
-	node* pn = (node*)malloc(sizeof(node));
-	strcpy(pn->member.id, "1");
-	strcpy(pn->member.name, "C Primer Plus");
-	pn->member.price = 23.00f;
-	strcpy(pn->member.describe, "this is C book");
-	pn->next = NULL;
-	pl->next = pn;
+	node* first_node = (node*)malloc(sizeof(node));
+	strcpy(first_node->member.id, "1");
+	strcpy(first_node->member.name, "C Primer Plus");
+	first_node->member.price = 23.00f;
+	strcpy(first_node->member.describe, "this is C book");
+	first_node->next = NULL;
+	pl->next = first_node;
 
 	/* the second node */
-	node* pthree = (node*)malloc(sizeof(node));
-	/*
-	 * strcpy(pthree->member.id, "2");
-	 * strcpy(pthree->member.name, "C++");
-	 * pthree->member.price = 34.00f;
-	 * strcpy(pthree->member.describe, "this is c++ book");
-	 */
-	pthree->next = NULL;
-	pn->next = pthree;
+	#if 0
+	node* second_node = (node*)malloc(sizeof(node));
+	strcpy(second_node->member.id, "2");
+	strcpy(second_node->member.name, "C++");
+	second_node->member.price = 34.00f;
+	strcpy(second_node->member.describe, "this is c++ book");
+	second_node->next = NULL;
+	first_node->next = second_node;
+	#endif
 
 	/* the third node */
-	node* pnode = (node*)malloc(sizeof(node));
-	pnode->next = NULL;
-	pthree->next = pnode;
+#if 0
+	node* third_node = (node*)malloc(sizeof(node));
+	third_node->next = NULL;
+	second_node->next = third_node;
+#endif
 
 	printf("linked_list_length : %u\n", linked_list_length(pl));
 

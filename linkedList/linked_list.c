@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.c
-#   Last Modified : 2020-02-27 12:23
+#   Last Modified : 2020-02-27 20:05
 #   Describe      :
 #
 # ====================================================*/
@@ -35,12 +35,12 @@ unsigned int linked_list_length(plist pl)
 {
 	unsigned int length = 0;
 	
-	node* pn = pl->next;
+	node* cur_node = pl->next;
 
-	while (pn)
+	while (cur_node)
 	{
 		length++;
-		pn = pn->next;
+		cur_node = cur_node->next;
 	}
 
 	return length;
@@ -49,13 +49,13 @@ unsigned int linked_list_length(plist pl)
 
 bool linked_list_clear(plist pl)
 {
-	node* p_cur = pl->next;
+	node* cur_node = pl->next;
 
-	while (p_cur)
+	while (cur_node)
 	{
-		node* pnext = p_cur->next;
-		free(p_cur);
-		p_cur = pnext;
+		node* pnext = cur_node->next;
+		free(cur_node);
+		cur_node = pnext;
 	}
 
 	return true;
@@ -67,14 +67,14 @@ bool linked_list_take_elem(plist pl, int pos, ElemType* e)
 	unsigned int cnt, len;
 	cnt = 1;
 	len = linked_list_length(pl);
-	node* p_cur = pl->next;
+	node* cur_node = pl->next;
 
 	if (! linked_list_empty(pl) && (pos > 0 && pos < len + 1))
 	{
 		while (cnt++ != pos)
-			p_cur = p_cur->next;
+			cur_node = cur_node->next;
 
-		*e = p_cur->member;
+		*e = cur_node->member;
 
 		return true;
 	} else
@@ -88,16 +88,16 @@ bool linked_list_take_elem(plist pl, int pos, ElemType* e)
 
 bool linked_list_destory(plist pl)
 {
-	node* pn = NULL;
+	node* cur_node = NULL;
 
 	while (pl)
 	{
-		pn = pl;
+		cur_node = pl;
 		pl = pl->next;
-		free(pn);
+		free(cur_node);
 	}
 	
-	pn = NULL;
+	cur_node = NULL;
 	
 	return true;
 }

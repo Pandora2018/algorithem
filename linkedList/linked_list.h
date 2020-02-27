@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.h
-#   Last Modified : 2020-02-27 12:23
+#   Last Modified : 2020-02-27 20:05
 #   Describe      :
 #
 # ====================================================*/
@@ -23,7 +23,7 @@
 
 
 /* define "ElemType" */
-typedef struct books
+typedef struct book
 {
 	char id[10];
 	char name[20];
@@ -36,7 +36,7 @@ typedef struct books
 typedef struct _node
 {
 	ElemType member;
-	struct _node *next;
+	struct _node* next;
 } node;
 
 
