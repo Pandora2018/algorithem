@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.c
-#   Last Modified : 2020-02-27 20:05
+#   Last Modified : 2020-02-28 15:46
 #   Describe      :
 #
 # ====================================================*/
@@ -16,12 +16,12 @@
 #include "linked_list.h"
 
 
-bool linked_list_initi(plist pl)
+plist linked_list_initi(void)
 {
-	pl = (plist)malloc(sizeof(node));
+	plist pl = (plist)malloc(sizeof(node));
 	if (! pl) return false;
 	pl->next = NULL;
-	return true;
+	return pl;
 }
 
 
@@ -30,6 +30,13 @@ bool linked_list_empty(plist pl)
 	return (pl->next ? false : true);
 }
 
+node* linked_list_new_node(node* prev_node)
+{
+	node* n = (node*)malloc(sizeof(node));
+	prev_node->next = n;
+	n->next = NULL;
+	return n;
+}
 
 unsigned int linked_list_length(plist pl)
 {
@@ -53,10 +60,12 @@ bool linked_list_clear(plist pl)
 
 	while (cur_node)
 	{
-		node* pnext = cur_node->next;
+		node* next_node = cur_node->next;
 		free(cur_node);
-		cur_node = pnext;
+		cur_node = next_node;
 	}
+
+	pl->next = NULL;
 
 	return true;
 }

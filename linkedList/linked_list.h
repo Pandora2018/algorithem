@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.h
-#   Last Modified : 2020-02-27 20:05
+#   Last Modified : 2020-02-28 15:47
 #   Describe      :
 #
 # ====================================================*/
@@ -45,9 +45,11 @@ typedef node* plist;
 
 
 /* operator linked list */
-bool linked_list_initi(plist pl);
+plist linked_list_initi(void);
 
 bool linked_list_empty(plist pl);
+
+node* linked_list_new_node(node* prev_node);
 
 unsigned int linked_list_length(plist pl);
 
