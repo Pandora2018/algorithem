@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.h
-#   Last Modified : 2020-02-28 15:47
+#   Last Modified : 2020-03-10 16:41
 #   Describe      :
 #
 # ====================================================*/
@@ -21,14 +21,15 @@
 	extern "C" {
 #endif
 
+typedef int status;
 
 /* define "ElemType" */
 typedef struct book
 {
 	char id[10];
-	char name[20];
+	char name[30];
 	float price;
-	char describe[30];
+	char describe[60];
 } ElemType;
 
 
@@ -56,6 +57,9 @@ unsigned int linked_list_length(plist pl);
 bool linked_list_clear(plist pl);
 
 bool linked_list_take_elem(plist pl, int pos, ElemType* e);
+
+int linked_list_find_elem(plist pl, ElemType* specified_elem,
+		status (*compare)(ElemType* linked_list_elem, ElemType* specified_elem));
 
 
 
