@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.c
-#   Last Modified : 2020-03-11 13:29
+#   Last Modified : 2020-03-11 17:57
 #   Describe      :
 #
 # ====================================================*/
@@ -58,6 +58,26 @@ unsigned int linked_list_length(plist pl)
 	}
 
 	return length;
+}
+
+
+void linked_list_visit(plist pl)
+{
+	node* cur_node = pl->next;
+
+	while (cur_node)
+	{
+		printf("%s%s%.2f\n%s",
+				cur_node->member.id,
+				cur_node->member.name,
+				cur_node->member.price,
+				cur_node->member.describe);
+		printf("---------------\n");
+
+		cur_node = cur_node->next;
+	}
+
+	return;
 }
 
 
