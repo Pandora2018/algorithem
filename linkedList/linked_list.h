@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.h
-#   Last Modified : 2020-03-10 16:41
+#   Last Modified : 2020-03-11 13:30
 #   Describe      :
 #
 # ====================================================*/
@@ -60,6 +60,8 @@ bool linked_list_take_elem(plist pl, int pos, ElemType* e);
 
 int linked_list_find_elem(plist pl, ElemType* specified_elem,
 		status (*compare)(ElemType* linked_list_elem, ElemType* specified_elem));
+
+bool linked_list_insert_node(plist pl, int pos);
 
 
 
