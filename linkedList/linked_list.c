@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.c
-#   Last Modified : 2020-03-11 17:57
+#   Last Modified : 2020-03-12 16:54
 #   Describe      :
 #
 # ====================================================*/
@@ -143,8 +143,11 @@ bool linked_list_insert_node(plist pl, int pos)
 	node* cur_node = pl;
 	unsigned int cur_pos = 0;
 
-	while (cur_node && cur_pos++ < pos - 1)
+	while (cur_node && cur_pos < pos - 1)
+	{
 		cur_node = cur_node->next;
+		cur_pos++;
+	}
 	
 	if (! cur_node || cur_pos < 0)
 		return false;
@@ -153,6 +156,31 @@ bool linked_list_insert_node(plist pl, int pos)
 	node* insert_node = linked_list_new_node(cur_node);
 	insert_node->next = tmp_node;
 
+	return true;
+}
+
+
+bool linked_list_delete_node(plist pl, int pos, node* no)
+{
+	node* cur_node = pl;
+	unsigned int cur_pos = 0;
+
+	// locate (pos - 1) node
+	while (cur_node && cur_pos < pos - 1)
+	{
+		cur_node = cur_node->next;
+		cur_pos++;
+	}
+
+	// if pos < 1 or pos > linked_list_length, then return fasle
+	if (! cur_node || cur_pos > pos - 1)
+		return false;
+
+	node* delete_node = cur_node->next;
+	*no = *delete_node;
+	cur_node->next = delete_node->next;
+	free(delete_node);
+	
 	return true;
 }
 
