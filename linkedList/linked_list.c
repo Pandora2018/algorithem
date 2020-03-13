@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.c
-#   Last Modified : 2020-03-12 16:54
+#   Last Modified : 2020-03-13 11:07
 #   Describe      :
 #
 # ====================================================*/
@@ -33,6 +33,7 @@ inline bool linked_list_empty(plist pl)
 node* linked_list_new_node(node* prev_node)
 {
 	node* n = (node*)malloc(sizeof(node));
+	if(! n) exit(EXIT_FAILURE);
 
 	fgets(n->member.id, 10, stdin);
 	fgets(n->member.name, 30, stdin);
@@ -41,6 +42,21 @@ node* linked_list_new_node(node* prev_node)
 	fgets(n->member.describe, 60, stdin);
 
 	prev_node->next = n;
+	n->next = NULL;
+	return n;
+}
+
+static node* linked_list_create_node(void)
+{
+	node* n = (node*)malloc(sizeof(node));
+	if(! n) exit(EXIT_FAILURE);
+
+	fgets(n->member.id, 10, stdin);
+	fgets(n->member.name, 30, stdin);
+	scanf("%f", & n->member.price);
+	getchar();
+	fgets(n->member.describe, 60, stdin);
+
 	n->next = NULL;
 	return n;
 }
@@ -184,6 +200,23 @@ bool linked_list_delete_node(plist pl, int pos, node* no)
 	return true;
 }
 
+bool linked_list_head_insert(plist pl, int num)
+{
+	node* new_node = NULL;
+
+	if (num <= 0) return false;
+
+	for (int cnt = num; cnt > 0; --cnt)
+	{
+		new_node = linked_list_create_node();
+		new_node->next = pl->next;
+		pl->next = new_node;
+	}
+
+	new_node = NULL;
+
+	return true;
+}
 
 
 bool linked_list_destory(plist pl)
