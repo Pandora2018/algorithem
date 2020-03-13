@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.h
-#   Last Modified : 2020-03-13 10:22
+#   Last Modified : 2020-03-13 18:01
 #   Describe      :
 #
 # ====================================================*/
@@ -71,8 +71,7 @@ bool linked_list_delete_node(plist pl, int pos, node* no);
 
 bool linked_list_head_insert(plist pl, int num);
 
-
-
+bool linked_list_tail_insert(plist pl, int num);
 
 bool linked_list_destory(plist pl);
 
