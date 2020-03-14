@@ -27,6 +27,10 @@ plist linked_list_initi(void)
 
 inline bool linked_list_empty(plist pl)
 {
+	/*
+	 * if linked_list is empty, then return true,
+	 * not empty return false.
+	 */
 	return (pl->next ? false : true);
 }
 
@@ -65,9 +69,9 @@ unsigned int linked_list_length(plist pl)
 {
 	unsigned int length = 0;
 	
-	node* cur_node = pl->next;
+	node* cur_node = pl;
 
-	while (cur_node)
+	while (cur_node->next)
 	{
 		length++;
 		cur_node = cur_node->next;
