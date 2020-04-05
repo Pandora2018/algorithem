@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_list.c
-#   Last Modified : 2020-03-13 18:31
+#   Last Modified : 2020-04-05 15:38
 #   Describe      :
 #
 # ====================================================*/
@@ -112,8 +112,6 @@ bool linked_list_clear(plist pl)
 		cur_node = next_node;
 	}
 
-	pl->next = NULL;
-
 	return true;
 }
 
@@ -125,19 +123,17 @@ bool linked_list_take_elem(plist pl, int pos, ElemType* e)
 	len = linked_list_length(pl);
 	node* cur_node = pl->next;
 
-	if (! linked_list_empty(pl) && (pos > 0 && pos < len + 1))
+	if (linked_list_empty(pl) || pos < 0 || pos > len)
 	{
-		while (cnt++ != pos)
-			cur_node = cur_node->next;
-
-		*e = cur_node->member;
-
-		return true;
-	} else
-	{
-		printf("the linked list not element or postion error.\n");
 		return false;
 	}
+
+	while (cnt++ != pos)
+		cur_node = cur_node->next;
+
+	*e = cur_node->member;
+
+	return true;
 }
 
 
@@ -243,16 +239,17 @@ bool linked_list_tail_insert(plist pl, int num)
 
 bool linked_list_destory(plist pl)
 {
-	node* cur_node = NULL;
+	node* cur_node = pl;
+	node* next_node = pl->next;
 
-	while (pl)
+	while (next_node)
 	{
-		cur_node = pl;
-		pl = pl->next;
 		free(cur_node);
+		cur_node = next_node;
+		next_node = next_node->next;
 	}
 	
-	cur_node = NULL;
-	
+	free(cur_node);
+
 	return true;
 }
