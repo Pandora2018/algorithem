@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : c_linked_list.c
-#   Last Modified : 2020-04-24 20:59
+#   Last Modified : 2020-04-26 21:19
 #   Describe      :
 #
 # ====================================================*/
@@ -18,20 +18,20 @@
 
 c_plist c_linked_list_initi(void)
 {
+	/* Create a head node of circle linked list */
 	c_plist c_pl = (c_plist)malloc(sizeof(node));
 	if (! c_pl) return NULL;
-	c_pl->next = NULL;
+	c_pl->next = c_pl;
 	return c_pl;
 }
-
 
 inline bool c_linked_list_empty(c_plist c_pl)
 {
 	/*
-	 * if c_linked_list is empty, then return true,
-	 * not empty return false.
+	 * The c_linked_list is empty,return true,
+	 * it's not empty,return false.
 	 */
-	return (c_pl->next ? false : true);
+	return (c_pl->next == c_pl ? true : false);
 }
 
 node* c_linked_list_new_node(node* prev_node)
@@ -52,6 +52,8 @@ node* c_linked_list_new_node(node* prev_node)
 
 static node* c_linked_list_create_node(void)
 {
+	/* The funtion only inner call */
+
 	node* n = (node*)malloc(sizeof(node));
 	if(! n) exit(EXIT_FAILURE);
 
@@ -71,7 +73,7 @@ unsigned int c_linked_list_length(c_plist c_pl)
 	
 	node* cur_node = c_pl;
 
-	while (cur_node->next)
+	while (cur_node->next != c_pl)
 	{
 		length++;
 		cur_node = cur_node->next;
@@ -80,12 +82,11 @@ unsigned int c_linked_list_length(c_plist c_pl)
 	return length;
 }
 
-
 void c_linked_list_visit(c_plist c_pl)
 {
 	node* cur_node = c_pl->next;
 
-	while (cur_node)
+	while (cur_node != c_pl)
 	{
 		printf("%s%s%.2f\n%s",
 				cur_node->info.id,
@@ -100,12 +101,22 @@ void c_linked_list_visit(c_plist c_pl)
 	return;
 }
 
-
 bool c_linked_list_clear(c_plist c_pl)
 {
+	/*
+	 * Clear circle linked list all element,
+	 * but head node not clear.
+	 */
 	node* cur_node = c_pl->next;
 
-	while (cur_node)
+	/* If circle linked list is empty,return fasle. */
+	if (cur_node == c_pl)
+	{
+		printf("Circle Linked List is empty,it's not clear\n");
+		return false;
+	}
+
+	while (cur_node != c_pl)
 	{
 		node* next_node = cur_node->next;
 		free(cur_node);
@@ -115,7 +126,6 @@ bool c_linked_list_clear(c_plist c_pl)
 	return true;
 }
 
-
 bool c_linked_list_take_elem(c_plist c_pl, int pos, ElemType* e)
 {
 	unsigned int cnt, len;
@@ -124,35 +134,42 @@ bool c_linked_list_take_elem(c_plist c_pl, int pos, ElemType* e)
 	node* cur_node = c_pl->next;
 
 	if (c_linked_list_empty(c_pl) || pos < 0 || pos > len)
-	{
 		return false;
-	}
 
-	while (cnt++ != pos)
+	while (cnt != pos)
+	{
 		cur_node = cur_node->next;
+		++cnt;
+	}
 
 	*e = cur_node->info;
 
 	return true;
 }
 
-
-int c_linked_list_find_elem(c_plist c_pl, ElemType* specified_elem,
-		status (*compare)(ElemType* c_linked_list_elem, ElemType* specified_elem))
+int c_linked_list_find_elem(c_plist c_pl,
+		ElemType* specified_elem,
+		status (*compare)(
+			ElemType* c_linked_list_elem,
+			ElemType* specified_elem)
+		)
 {
-	int pos = 1;
+	/*
+	 * Find element from circle linked list,return the element postion,
+	 * not find element return zero.
+	 */
+	int cur_pos = 1;
 	node* current_node = c_pl->next;
 
-	while (current_node &&
+	while (current_node != c_pl &&
 			! (*compare)(&(current_node->info), specified_elem))
 	{
 		current_node = current_node->next;
-		pos++;
+		cur_pos++;
 	}
 
-	return (current_node ? pos : -1);
+	return (current_node != c_pl ? cur_pos : 0);
 }
-
 
 bool c_linked_list_insert_node(c_plist c_pl, int pos)
 {
@@ -174,7 +191,6 @@ bool c_linked_list_insert_node(c_plist c_pl, int pos)
 
 	return true;
 }
-
 
 bool c_linked_list_delete_node(c_plist c_pl, int pos, node* no)
 {
