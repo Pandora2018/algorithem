@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : c_linked_list.c
-#   Last Modified : 2020-04-26 21:19
+#   Last Modified : 2020-04-27 10:19
 #   Describe      :
 #
 # ====================================================*/
@@ -123,6 +123,9 @@ bool c_linked_list_clear(c_plist c_pl)
 		cur_node = next_node;
 	}
 
+	/* Circle Linked List is empty after clear. */
+	c_pl->next = c_pl;
+
 	return true;
 }
 
@@ -176,15 +179,20 @@ bool c_linked_list_insert_node(c_plist c_pl, int pos)
 	node* cur_node = c_pl;
 	unsigned int cur_pos = 0;
 
-	while (cur_node && cur_pos < pos - 1)
+	/*
+	 * Insert postion between 1 and length(c_pl) + 1
+	 * in the circle linked list. 
+	 */
+
+	if ( pos < 1 || pos > c_linked_list_length(c_pl) + 1)
+		return false;
+
+	while (cur_node->next != c_pl && cur_pos < pos - 1)
 	{
 		cur_node = cur_node->next;
 		cur_pos++;
 	}
 	
-	if (! cur_node || cur_pos > pos - 1)
-		return false;
-
 	node* tmp_node = cur_node->next;
 	node* insert_node = c_linked_list_new_node(cur_node);
 	insert_node->next = tmp_node;

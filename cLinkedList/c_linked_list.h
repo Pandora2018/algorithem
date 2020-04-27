@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : c_linked_list.h
-#   Last Modified : 2020-04-26 20:08
+#   Last Modified : 2020-04-27 10:14
 #   Describe      :
 #
 # ====================================================*/
@@ -14,7 +14,6 @@
 #define __LINKED_LIST_
 
 #include <stdbool.h>
-
 
 /* Support c++ */
 #ifdef __cplusplus
@@ -32,7 +31,6 @@ typedef struct book
 	char describe[60];
 } ElemType;
 
-
 /* Circle Linked List node define */
 typedef struct _node
 {
@@ -40,10 +38,8 @@ typedef struct _node
 	struct _node* next;
 } node;
 
-
 /* Circle Linked List point define */
 typedef node* c_plist;
-
 
 /* Operator of Circle Linked List */
 c_plist c_linked_list_initi(void);
