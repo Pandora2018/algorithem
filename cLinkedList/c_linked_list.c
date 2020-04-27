@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : c_linked_list.c
-#   Last Modified : 2020-04-27 10:19
+#   Last Modified : 2020-04-27 19:10
 #   Describe      :
 #
 # ====================================================*/
@@ -67,7 +67,7 @@ static node* c_linked_list_create_node(void)
 	return n;
 }
 
-unsigned int c_linked_list_length(c_plist c_pl)
+unsigned int c_linked_list_length(const c_plist c_pl)
 {
 	unsigned int length = 0;
 	
@@ -82,7 +82,7 @@ unsigned int c_linked_list_length(c_plist c_pl)
 	return length;
 }
 
-void c_linked_list_visit(c_plist c_pl)
+void c_linked_list_visit(const c_plist c_pl)
 {
 	node* cur_node = c_pl->next;
 
@@ -101,7 +101,7 @@ void c_linked_list_visit(c_plist c_pl)
 	return;
 }
 
-bool c_linked_list_clear(c_plist c_pl)
+bool c_linked_list_clear(const c_plist c_pl)
 {
 	/*
 	 * Clear circle linked list all element,
@@ -129,7 +129,7 @@ bool c_linked_list_clear(c_plist c_pl)
 	return true;
 }
 
-bool c_linked_list_take_elem(c_plist c_pl, int pos, ElemType* e)
+bool c_linked_list_take_elem(const c_plist c_pl, int pos, ElemType* e)
 {
 	unsigned int cnt, len;
 	cnt = 1;
@@ -150,7 +150,7 @@ bool c_linked_list_take_elem(c_plist c_pl, int pos, ElemType* e)
 	return true;
 }
 
-int c_linked_list_find_elem(c_plist c_pl,
+int c_linked_list_find_elem(const c_plist c_pl,
 		ElemType* specified_elem,
 		status (*compare)(
 			ElemType* c_linked_list_elem,
@@ -174,7 +174,7 @@ int c_linked_list_find_elem(c_plist c_pl,
 	return (current_node != c_pl ? cur_pos : 0);
 }
 
-bool c_linked_list_insert_node(c_plist c_pl, int pos)
+bool c_linked_list_insert_node(c_plist const c_pl, int pos)
 {
 	node* cur_node = c_pl;
 	unsigned int cur_pos = 0;
@@ -200,21 +200,24 @@ bool c_linked_list_insert_node(c_plist c_pl, int pos)
 	return true;
 }
 
-bool c_linked_list_delete_node(c_plist c_pl, int pos, node* no)
+bool c_linked_list_delete_node(c_plist const c_pl, int pos, node* no)
 {
 	node* cur_node = c_pl;
 	unsigned int cur_pos = 0;
 
-	// locate (pos - 1) node
-	while (cur_node && cur_pos < pos - 1)
+	/* If pos < 1 or pos > c_linked_list_length,return fasle. */
+	if (pos < 1 || pos > c_linked_list_length(c_pl))
+		return false;
+
+	if (c_linked_list_empty(c_pl))
+		return false;
+
+	/* Locate (pos - 1) node */
+	while (cur_node->next != c_pl && cur_pos < pos - 1)
 	{
 		cur_node = cur_node->next;
 		cur_pos++;
 	}
-
-	// if pos < 1 or pos > c_linked_list_length, then return fasle
-	if (! cur_node || cur_pos > pos - 1)
-		return false;
 
 	node* delete_node = cur_node->next;
 	*no = *delete_node;
@@ -224,7 +227,7 @@ bool c_linked_list_delete_node(c_plist c_pl, int pos, node* no)
 	return true;
 }
 
-bool c_linked_list_head_insert(c_plist c_pl, int num)
+bool c_linked_list_head_insert(c_plist const c_pl, int num)
 {
 	node* new_node = NULL;
 
@@ -242,31 +245,34 @@ bool c_linked_list_head_insert(c_plist c_pl, int num)
 	return true;
 }
 
-bool c_linked_list_tail_insert(c_plist c_pl, int num)
+bool c_linked_list_tail_insert(c_plist const c_pl, int num)
 {
 	if (num <= 0) return false;
 
 	node* tail_node = c_pl;
 
-	// locate c_linked_list's tail node
-	while (tail_node->next)
+	/* Locate c_linked_list's tail node */
+	while (tail_node->next != c_pl)
 		tail_node = tail_node->next;
 
 	for (int cnt = num; cnt > 0; --cnt)
 	{
 		tail_node->next = c_linked_list_create_node();
 		tail_node = tail_node->next;
+		tail_node->next = c_pl;
 	}
 
 	return true;
 }
 
-bool c_linked_list_destory(c_plist c_pl)
+bool c_linked_list_destory(c_plist const c_pl)
 {
+	/* Destory Circle Linked List all node,contain head node. */
+
 	node* cur_node = c_pl;
 	node* next_node = c_pl->next;
 
-	while (next_node)
+	while (next_node != c_pl)
 	{
 		free(cur_node);
 		cur_node = next_node;
@@ -274,6 +280,7 @@ bool c_linked_list_destory(c_plist c_pl)
 	}
 	
 	free(cur_node);
+	next_node = NULL;
 
 	return true;
 }
