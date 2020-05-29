@@ -48,7 +48,7 @@ bool ring_queue_insert(ring_queue* const pr, ElemType* e)
 		return FULL;
 
 	pr->data[pr->rear] = *e;
-	(pr->rear)++;
+	pr->rear = (pr->rear + 1) % MAX_SIZE;
 
 	return true;
 }
@@ -59,7 +59,7 @@ bool ring_queue_delete(ring_queue* const pr, ElemType* e)
 		return EMPTY;
 	
 	*e = pr->data[pr->front];
-	(pr->front)++;
+	pr->front = (pr->front + 1) % MAX_SIZE;
 
 	return true;
 }
