@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "ring_queue.h"
 
-bool ring_queue_initi(ring_queue* pr)
+bool ring_queue_initi(ring_queue* const pr)
 {
 	pr->data = (ElemType*)malloc(MAX_SIZE * sizeof(ring_queue));
 	if (! pr) return false;
@@ -24,7 +24,7 @@ bool ring_queue_initi(ring_queue* pr)
 	return true;
 }
 
-inline bool ring_queue_empty(ring_queue* pr)
+inline bool ring_queue_empty(const ring_queue* pr)
 {
 	/*
 	 * If ring_queue is empty,return true;
@@ -33,7 +33,7 @@ inline bool ring_queue_empty(ring_queue* pr)
 	return (pr->front == pr->rear ? true : false);
 }
 
-inline bool ring_queue_full(ring_queue* pr)
+inline bool ring_queue_full(const ring_queue* pr)
 {
 	 /*
 	  * If ring_queue is full,return true;
@@ -42,7 +42,7 @@ inline bool ring_queue_full(ring_queue* pr)
 	return ((pr->rear + 1) % MAX_SIZE == pr->front ? true : false);
 }
 
-bool ring_queue_insert(ring_queue* pr, ElemType* e)
+bool ring_queue_insert(ring_queue* const pr, ElemType* e)
 {
 	if (ring_queue_full(pr))
 		return FULL;
@@ -53,7 +53,7 @@ bool ring_queue_insert(ring_queue* pr, ElemType* e)
 	return true;
 }
 
-bool ring_queue_delete(ring_queue* pr, ElemType* e)
+bool ring_queue_delete(ring_queue* const pr, ElemType* e)
 {
 	if (ring_queue_empty(pr))
 		return EMPTY;
@@ -64,12 +64,12 @@ bool ring_queue_delete(ring_queue* pr, ElemType* e)
 	return true;
 }
 
-inline unsigned int ring_queue_length(ring_queue* pr)
+inline unsigned int ring_queue_length(const ring_queue* pr)
 {
 	 return (pr->rear - pr->front + MAX_SIZE) % MAX_SIZE;
 }
 
-void ring_queue_see(ring_queue* pr)
+void ring_queue_see(const ring_queue* pr)
 {
 	int index = pr->front;
 

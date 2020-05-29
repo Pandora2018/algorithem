@@ -32,19 +32,19 @@ typedef struct r_queue
 }ring_queue;
 
 /* Basic Operations */
-bool ring_queue_initi(ring_queue* pr);
+bool ring_queue_initi(ring_queue* const pr);
 
-bool ring_queue_empty(ring_queue* pr);
+bool ring_queue_empty(const ring_queue* pr);
 
-bool ring_queue_full(ring_queue* pr);
+bool ring_queue_full(const ring_queue* pr);
 
-bool ring_queue_insert(ring_queue* pr, ElemType* e);
+bool ring_queue_insert(ring_queue* const pr, ElemType* e);
 
-bool ring_queue_delete(ring_queue* pr, ElemType* e);
+bool ring_queue_delete(ring_queue* const pr, ElemType* e);
 
-unsigned int ring_queue_length(ring_queue* pr);
+unsigned int ring_queue_length(const ring_queue* pr);
 
-void ring_queue_see(ring_queue* pr);
+void ring_queue_see(const ring_queue* pr);
 
 #ifdef __cpluscplus
 	}
