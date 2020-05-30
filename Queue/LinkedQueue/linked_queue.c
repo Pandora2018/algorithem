@@ -19,7 +19,8 @@ bool linked_queue_initi(linked_queue* const pl)
 	pl->data = (ElemType*)malloc(sizeof(ElemType));
 	if (! pl->data) return false;
 	
-	pl->front = pl->rear = NULL;
+	pl->front = pl;
+	pl->rear = NULL;
 	pl->count = 0;
 
 	return true;
@@ -36,11 +37,6 @@ inline bool linked_queue_empty(const linked_queue* pl)
 
 bool linked_queue_insert(linked_queue* const pl, ElemType* e)
 {
-	linked_queue* q_node = (linked_queue*)malloc(sizeof(linked_queue));
-	queue_node->data = e;
-	(pl->count)++;
-	pl->next = q_node;
-	pl->next->next = NULL;
 
 	return true;
 }
