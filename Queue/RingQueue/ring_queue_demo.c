@@ -42,7 +42,7 @@ int main(void)
 	ring_queue_see(&rq);
 	printf("After length : %u\n", ring_queue_length(&rq));
 
-#if 0
+#if 1
 	/* Again aAdd data to ring_queue */
 	putchar('\n');
 

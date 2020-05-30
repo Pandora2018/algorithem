@@ -17,7 +17,7 @@
 bool ring_queue_initi(ring_queue* const pr)
 {
 	pr->data = (ElemType*)malloc(MAX_SIZE * sizeof(ring_queue));
-	if (! pr) return false;
+	if (! pr->data) return false;
 
 	pr->front = pr->rear = 0;
 
