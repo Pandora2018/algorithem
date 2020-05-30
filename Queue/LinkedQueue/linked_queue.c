@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_queue.c
-#   Last Modified : 2020-05-30 09:31
+#   Last Modified : 2020-05-30 19:20
 #   Describe      :
 #
 # ====================================================*/
@@ -16,11 +16,11 @@
 
 bool linked_queue_initi(linked_queue* const pl)
 {
-	pl->data = (ElemType*)malloc(sizeof(ElemType));
-	if (! pl->data) return false;
+	queue_node* q_node = (queue_node*)malloc(sizeof(queue_node));
 	
-	pl->front = pl;
-	pl->rear = NULL;
+	if (! q_node) return false;
+
+	pl->front = pl->rear = q_node;
 	pl->count = 0;
 
 	return true;
@@ -37,36 +37,48 @@ inline bool linked_queue_empty(const linked_queue* pl)
 
 bool linked_queue_insert(linked_queue* const pl, ElemType* e)
 {
+	queue_node* insert_node = (queue_node*)malloc(sizeof(queue_node));
+
+	if (! insert_node) return false;
+
+	insert_node->data = *e;
+	insert_node->next = NULL;
+
+	pl->rear->next = insert_node;
+	pl->rear = insert_node;
+	++(pl->count);
 
 	return true;
 }
 
 bool linked_queue_delete(linked_queue* const pl, ElemType* e)
 {
-	if (linked_queue_empty(pl))
-		return EMPTY;
-	
-	*e = pl->data[pl->front];
-	pl->front = (pl->front + 1) % MAX_SIZE;
+	if (linked_queue_empty(pl)) return EMPTY;
 
-	return true;
+	queue_node* del_node = pl->front->next;
+	*e = del_node->data;
+	pl->front->next = del_node->next;
+	free(del_node);
+	--(pl->count);
+
+	return false;
 }
 
 inline unsigned int linked_queue_length(const linked_queue* pl)
 {
-	 return (pl->rear - pl->front + MAX_SIZE) % MAX_SIZE;
+	 return (pl->count);
 }
 
 void linked_queue_see(const linked_queue* pl)
 {
-	int index = pl->front;
+	queue_node* current_node = pl->front->next;
 
-	while (index != pl->rear)
+	while (current_node)
 	{
-		plintf("%d ", pl->data[index]);
-		index = (++index) % MAX_SIZE;
+		printf("%d ", current_node->data);
+		current_node = current_node->next;
 	}
-	
+
 	putchar('\n');
 
 	return;

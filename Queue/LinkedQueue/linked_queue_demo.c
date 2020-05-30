@@ -4,61 +4,60 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_queue_demo.c
-#   Last Modified : 2020-05-30 09:14
+#   Last Modified : 2020-05-30 19:29
 #   Describe      :
 #
 # ====================================================*/
 
 
 #include <stdio.h>
-#include <string.h>
-#include "ring_queue.h"
+#include "linked_queue.h"
 
 int main(void)
 {
-	ring_queue rq;
+	linked_queue ql;
 	
-	if (! ring_queue_initi(&rq))
+	if (! linked_queue_initi(&ql))
 	{
-		printf("Ring Queue initi false!\n");
+		printf("linked Queue initi false!\n");
 		return 1;
 	}
 	
-	for (int i = 1; i <= 8; ++i)
-		ring_queue_insert(&rq, &i);
+	for (int i = 1; i <= 20; ++i)
+		linked_queue_insert(&ql, &i);
 	
-	puts("Ring Queue Before:");
-	ring_queue_see(&rq);
-	printf("Before length : %u\n", ring_queue_length(&rq));
+	puts("linked Queue Before:");
+	linked_queue_see(&ql);
+	printf("Before length : %u\n", linked_queue_length(&ql));
 
 	putchar('\n');
 
 	ElemType delete_e;
 
-	for (int j = 1; j <= 3; ++j)
-		ring_queue_delete(&rq, &delete_e);
+	for (int j = 1; j <= 7; ++j)
+		linked_queue_delete(&ql, &delete_e);
 
-	puts("Ring Queue After:");
-	ring_queue_see(&rq);
-	printf("After length : %u\n", ring_queue_length(&rq));
+	puts("linked Queue After:");
+	linked_queue_see(&ql);
+	printf("After length : %u\n", linked_queue_length(&ql));
 
 #if 1
-	/* Again aAdd data to ring_queue */
+	/* Again aAdd data to linked_queue */
 	putchar('\n');
 
-	for (int i = 1; i <= 4; ++i)
-		ring_queue_insert(&rq, &i);
+	for (int i = 1; i <= 6; ++i)
+		linked_queue_insert(&ql, &i);
 
-	ring_queue_see(&rq);
-	printf("Before length : %u\n", ring_queue_length(&rq));
+	linked_queue_see(&ql);
+	printf("Again add data queue length : %u\n", linked_queue_length(&ql));
 
 	putchar('\n');
 
-	for (int j = 1; j <= 6; ++j)
-		ring_queue_delete(&rq, &delete_e);
+	for (int j = 1; j <= 18; ++j)
+		linked_queue_delete(&ql, &delete_e);
 
-	ring_queue_see(&rq);
-	printf("Before length : %u\n", ring_queue_length(&rq));
+	linked_queue_see(&ql);
+	printf("Again delete data queue length : %u\n", linked_queue_length(&ql));
 
 #endif
 

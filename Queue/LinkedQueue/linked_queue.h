@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : linked_queue.h
-#   Last Modified : 2020-05-30 09:31
+#   Last Modified : 2020-05-30 19:20
 #   Describe      :
 #
 # ====================================================*/
@@ -20,14 +20,20 @@
 #include <stdbool.h>
 #include "elem_type.h"
 
-#define FULL 1;
 #define EMPTY 2;
 
+/* Define node of linked_queue */
 typedef struct queue_node
 {
-	ElemType* data;
+	ElemType data;
+	struct queue_node* next;
+} queue_node;
+
+/* Define linked_queue */
+typedef struct linked_queue
+{
+	queue_node *front, *rear;
 	unsigned int count;
-	queue_node* front, rear;
 } linked_queue;
 
 /* Basic Operations */
