@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : string.c
-#   Last Modified : 2020-06-09 20:32
+#   Last Modified : 2020-06-10 20:09
 #   Describe      :
 #
 # ====================================================*/
@@ -17,6 +17,8 @@
 
 bool string_initi(string* T, char* c)
 {
+	if (! T->length) return STRING_EMPTY;
+
 	T->ch = (char*)malloc(sizeof(char) * STRING_SIZE);
 	if (! T->ch) return false;
 
@@ -41,6 +43,16 @@ bool string_copy(string* des, const string* src)
 	
 	des->ch = src->ch;
 	des->length = src->length;
+
+	return true;
+}
+
+bool string_delete(string* T)
+{
+	if (! T->length) return STRING_EMPTY;
+	
+	T->ch = NULL;
+	T->length = 0;
 
 	return true;
 }
