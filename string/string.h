@@ -4,7 +4,7 @@
 #   Author        : Pandora
 #   Email         : pandora@github.com
 #   File Name     : string.h
-#   Last Modified : 2020-06-10 20:09
+#   Last Modified : 2020-06-11 20:55
 #   Describe      :
 #
 # ==================================================== */
@@ -21,8 +21,8 @@
 #include <stdbool.h>
 
 #define STRING_SIZE 100
-
-#define STRING_EMPTY 0
+#define STRING_EMPTY -1
+#define STRING_INDEX_OVER -1
 
 typedef struct string
 {
@@ -37,6 +37,8 @@ unsigned int string_length(const string* T);
 bool string_copy(string* des, const string* src);
 
 bool string_delete(string* T);
+
+int string_matcher_BF(const string* T, unsigned int pos, const string* P);
 
 
 
