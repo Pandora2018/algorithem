@@ -61,7 +61,7 @@ int string_matcher_BF(const string* T, unsigned int pos, const string* P)
 	unsigned int T_len = string_length(T);
 	unsigned int P_len = string_length(P);
 
-	if (pos<0||pos>T_len) return STRING_INDEX_OVER;
+	if (pos<0||pos>T_len) return STRING_INDEX_ERROR;
 
 	// i is string "T" pointer,j is string "P" pointrt.
 	int i, j, slide;

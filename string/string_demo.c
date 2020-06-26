@@ -37,9 +37,9 @@ int main(void)
 	string m;
 	string_initi(&m, "0X");
 
-	int pos = string_matcher_BF(&s, 6, &m);
+	int pos = string_matcher_BF(&s, 10, &m);
 
-	if (pos==STRING_INDEX_OVER)
+	if (pos==STRING_INDEX_ERROR)
 		printf("POS ERROR\n");
 	else if (pos==0)
 		printf("STRING NOT EXIST SUBSTRING\n");

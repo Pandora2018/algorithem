@@ -22,7 +22,7 @@
 
 #define STRING_SIZE 100
 #define STRING_EMPTY -1
-#define STRING_INDEX_OVER -1
+#define STRING_INDEX_ERROR -1
 
 typedef struct string
 {
